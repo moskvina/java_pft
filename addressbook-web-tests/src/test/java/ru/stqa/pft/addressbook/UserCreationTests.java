@@ -22,6 +22,10 @@ public class UserCreationTests {
         wd = new FirefoxDriver();
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/index.php");
+        login();
+    }
+
+    private void login() {
         wd.findElement(By.name("user")).click();
         wd.findElement(By.name("user")).clear();
         wd.findElement(By.name("user")).sendKeys("admin");
@@ -30,10 +34,24 @@ public class UserCreationTests {
         wd.findElement(By.name("pass")).sendKeys("secret");
         wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
     }
-    
+
     @Test
     public void testUserCreation() {
-        wd.findElement(By.linkText("add new")).click();
+        initUserCreation();
+        fillUserForm();
+        submitUserCreation();
+        returnToHomePage();
+    }
+
+    private void returnToHomePage() {
+        wd.findElement(By.linkText("home page")).click();
+    }
+
+    private void submitUserCreation() {
+        wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+    }
+
+    private void fillUserForm() {
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
         wd.findElement(By.name("firstname")).sendKeys("Test1");
@@ -51,9 +69,12 @@ public class UserCreationTests {
         wd.findElement(By.name("email")).click();
         wd.findElement(By.name("email")).clear();
         wd.findElement(By.name("email")).sendKeys("test@gmail.com");
-        wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
     }
-    
+
+    private void initUserCreation() {
+        wd.findElement(By.linkText("add new")).click();
+    }
+
     @AfterMethod
     public void tearDown() {
         wd.quit();
