@@ -14,7 +14,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.*;
 <<<<<<< HEAD:addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/UserCreationTests.java
 <<<<<<< HEAD:addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/UserCreationTests.java
+<<<<<<< HEAD:addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/UserCreationTests.java
 import ru.stqa.pft.addressbook.model.UserData;
+=======
+import static org.openqa.selenium.OutputType.*;
+>>>>>>> parent of d722a60... UserCreationTests - refactoring:addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/UserCreationTests.java
 =======
 import static org.openqa.selenium.OutputType.*;
 >>>>>>> parent of d722a60... UserCreationTests - refactoring:addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/UserCreationTests.java
