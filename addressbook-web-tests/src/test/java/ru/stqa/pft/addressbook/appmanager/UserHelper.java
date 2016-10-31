@@ -7,11 +7,11 @@ import ru.stqa.pft.addressbook.model.UserData;
 /**
  * Created by jane on 10/31/16.
  */
-public class UserHelper {
- private FirefoxDriver wd;
+public class UserHelper extends HelperBase {
 
   public UserHelper(FirefoxDriver wd) {
-    this.wd = wd;
+    super(wd);
+
   }
 
   public void deleteSelectedUsers() {
@@ -27,21 +27,11 @@ public class UserHelper {
   }
 
   public void fillUserForm(UserData userData) {
-      wd.findElement(By.name("firstname")).click();
-      wd.findElement(By.name("firstname")).clear();
-      wd.findElement(By.name("firstname")).sendKeys(userData.getFirstname());
-      wd.findElement(By.name("lastname")).click();
-      wd.findElement(By.name("lastname")).clear();
-      wd.findElement(By.name("lastname")).sendKeys(userData.getLastname());
-      wd.findElement(By.name("address")).click();
-      wd.findElement(By.name("address")).clear();
-      wd.findElement(By.name("address")).sendKeys(userData.getAddress());
-      wd.findElement(By.name("home")).click();
-      wd.findElement(By.name("home")).clear();
-      wd.findElement(By.name("home")).sendKeys(userData.getHomenumber());
-      wd.findElement(By.name("email")).click();
-      wd.findElement(By.name("email")).clear();
-      wd.findElement(By.name("email")).sendKeys(userData.getEmail());
+    type(By.name("firstname"), userData.getFirstname());
+    type(By.name("lastname"), userData.getLastname());
+    type(By.name("address"), userData.getAddress());
+    type(By.name("home"), userData.getHomenumber());
+    type(By.name("email"), userData.getEmail());
   }
 
   public void initUserCreation() {
