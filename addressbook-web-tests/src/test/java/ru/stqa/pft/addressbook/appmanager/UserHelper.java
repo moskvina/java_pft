@@ -37,4 +37,12 @@ public class UserHelper extends HelperBase {
   public void initUserCreation() {
       wd.findElement(By.linkText("add new")).click();
   }
+
+  public void initUserModification() {
+    wd.findElement(By.xpath("//img[@title=\"Edit\"]")).click();
+  }
+
+  public void submitUserModification() {
+    click(By.name("update"));
+  }
 }
