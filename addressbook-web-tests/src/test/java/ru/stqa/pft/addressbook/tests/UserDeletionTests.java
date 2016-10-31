@@ -6,10 +6,10 @@ public class UserDeletionTests extends TestBase {
 
     @Test
     public void testUserDeletion() {
-      app.goToHomePage();
-      app.selectUser();
-      app.deleteSelectedUsers();
-      app.goToHomePage();
+      app.getNavigationHelper().goToHomePage();
+      app.getUserHelper().selectUser();
+      app.getUserHelper().deleteSelectedUsers();
+      app.getNavigationHelper().goToHomePage();
     }
 
 }
