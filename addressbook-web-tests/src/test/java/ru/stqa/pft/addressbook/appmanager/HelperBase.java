@@ -21,9 +21,13 @@ public class HelperBase {
   }
 
   protected void type(By locator, String text) {
+    click(locator);
     if (text != null) {
-      getElement(locator).clear();
-      getElement(locator).sendKeys(text);
+      String existingText = getElement(locator).getAttribute("value");
+      if (! text.equals(existingText)) {
+        getElement(locator).clear();
+        getElement(locator).sendKeys(text);
+      }
       }
     }
 
