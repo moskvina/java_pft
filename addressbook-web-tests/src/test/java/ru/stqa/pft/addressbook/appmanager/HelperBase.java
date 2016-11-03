@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
@@ -16,13 +17,16 @@ public class HelperBase {
   }
 
   protected void click(By locator) {
-    wd.findElement(locator).click();
+    getElement(locator).click();
   }
 
   protected void type(By locator, String text) {
-    click(locator);
-    wd.findElement(locator).clear();
-    wd.findElement(locator).sendKeys(text);
+    getElement(locator).clear();
+    getElement(locator).sendKeys(text);
+  }
+
+  private WebElement getElement(By locator) {
+    return wd.findElement(locator);
   }
 
   public boolean isAlertPresent() {

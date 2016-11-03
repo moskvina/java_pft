@@ -36,7 +36,7 @@ public class UserHelper extends HelperBase {
   }
 
   public void initUserCreation() {
-      wd.findElement(By.linkText("add new")).click();
+    wd.findElement(By.linkText("add new")).click();
   }
 
   public void initUserModification() {
@@ -45,5 +45,9 @@ public class UserHelper extends HelperBase {
 
   public void submitUserModification() {
     click(By.name("update"));
+  }
+
+  public void closeUserDeletionAlert() {
+    wd.switchTo().alert().accept();
   }
 }
