@@ -30,10 +30,7 @@ public class ApplicationManager {
       wd = new FirefoxDriver();
     } else if (browser == BrowserType.CHROME) {
       wd = new ChromeDriver();
-    } else if (browser == BrowserType.SAFARI) {
-      wd = new SafariDriver();
     }
-    wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/index.php");
     groupHelper = new GroupHelper(wd);
