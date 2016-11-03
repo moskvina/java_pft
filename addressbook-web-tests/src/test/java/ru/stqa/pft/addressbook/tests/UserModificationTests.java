@@ -13,7 +13,7 @@ public class UserModificationTests extends TestBase {
     app.getNavigationHelper().goToHomePage();
     app.getUserHelper().selectUser();
     app.getUserHelper().initUserModification();
-    app.getUserHelper().fillUserForm(new UserData("Test1", "Test2", "Ukraine", "+3809711110001", "test@gmail.com"));
+    app.getUserHelper().fillUserForm(new UserData("Test1", null, null, null, null));
     app.getUserHelper().submitUserModification();
     app.getNavigationHelper().goToHomePage();
   }
