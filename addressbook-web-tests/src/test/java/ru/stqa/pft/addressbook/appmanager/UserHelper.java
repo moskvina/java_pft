@@ -66,9 +66,9 @@ public class UserHelper extends HelperBase {
   }
 
 
-  public void createUser(UserData user, boolean b) {
+  public void createUser(UserData user) {
     initUserCreation();
-    fillUserForm(user, b);
+    fillUserForm(user, true);
     submitUserCreation();
     goToHomePage();
 
