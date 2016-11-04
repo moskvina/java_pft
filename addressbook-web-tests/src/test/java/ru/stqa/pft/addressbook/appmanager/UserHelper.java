@@ -60,4 +60,21 @@ public class UserHelper extends HelperBase {
   public void closeUserDeletionAlert() {
     wd.switchTo().alert().accept();
   }
+
+  private void goToHomePage() {
+    click(By.linkText("home"));
+  }
+
+
+  public void createUser(UserData user, boolean b) {
+    initUserCreation();
+    fillUserForm(user, b);
+    submitUserCreation();
+    goToHomePage();
+
+  }
+
+  public boolean isThereAUser() {
+    return isElementPresent(By.name("selected[]"));
+  }
 }
