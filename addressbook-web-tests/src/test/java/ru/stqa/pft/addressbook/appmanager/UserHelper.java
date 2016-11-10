@@ -22,8 +22,8 @@ public class UserHelper extends HelperBase {
     wd.findElement(By.xpath("//div[@id='content']/form[2]/div[2]/input")).click();
   }
 
-  public void selectUser() {
-    wd.findElement(By.name("selected[]")).click();
+  public void selectUser(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
   public void submitUserCreation() {
