@@ -2,8 +2,10 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.UserData;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -20,10 +22,17 @@ public class UserModificationTests extends TestBase {
     List<UserData> before = app.getUserHelper().getUserList();
     app.getUserHelper().selectUser(before.size() - 1);
     app.getUserHelper().initUserModification();
-    app.getUserHelper().fillUserForm(new UserData("Test1", "Test2", "Ukraine", "+3809711110001", "test@gmail.com", null), false);
+    UserData user = new UserData(before.get(before.size() - 1).getId(), "Test1", "Test2", "Ukraine", "+3809711110001", "test@gmail.com", null);
+    app.getUserHelper().fillUserForm(user, false);
     app.getUserHelper().submitUserModification();
     app.getNavigationHelper().goToHomePage();
     List<UserData> after = app.getUserHelper().getUserList();
     Assert.assertEquals(after.size(), before.size());
+
+    before.remove(before.size() -1);
+    before.add(user);
+    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+
+
   }
 }
