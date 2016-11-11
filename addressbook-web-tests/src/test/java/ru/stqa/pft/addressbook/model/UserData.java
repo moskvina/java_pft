@@ -10,7 +10,7 @@ public class UserData {
   private String group;
 
   public UserData(String firstname, String lastname, String address, String homenumber, String email, String group) {
-    this.id = 0;
+    this.id = Integer.MAX_VALUE;
     this.firstname = firstname;
     this.lastname = lastname;
     this.address = address;
@@ -68,7 +68,6 @@ public class UserData {
 
     UserData userData = (UserData) o;
 
-    if (id != userData.id) return false;
     if (firstname != null ? !firstname.equals(userData.firstname) : userData.firstname != null) return false;
     return lastname != null ? lastname.equals(userData.lastname) : userData.lastname == null;
 
@@ -76,8 +75,7 @@ public class UserData {
 
   @Override
   public int hashCode() {
-    int result = id;
-    result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
+    int result = firstname != null ? firstname.hashCode() : 0;
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
     return result;
   }
