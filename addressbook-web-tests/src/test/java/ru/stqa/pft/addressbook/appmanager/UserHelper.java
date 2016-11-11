@@ -3,10 +3,14 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.UserData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jane on 10/31/16.
@@ -27,7 +31,7 @@ public class UserHelper extends HelperBase {
   }
 
   public void submitUserCreation() {
-      wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+    wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
   }
 
   public void fillUserForm(UserData userData, boolean creation) {
@@ -80,5 +84,17 @@ public class UserHelper extends HelperBase {
 
   public int getUserCount() {
     return wd.findElements(By.name("selected[]")).size();
+  }
+
+  public List<UserData> getUserList() {
+    List<UserData> users = new ArrayList<UserData>();
+    List<WebElement> elements = wd.findElements(By.name("entry"));
+    for (WebElement element : elements){
+      String lastName = element.findElement(By.xpath(".//td[2]")).getText();
+      String firstName = element.findElement(By.xpath(".//td[3]")).getText();
+      UserData contact = new UserData(firstName, lastName, null, null, null, null);
+      users.add(contact);
+    }
+    return users;
   }
 }
