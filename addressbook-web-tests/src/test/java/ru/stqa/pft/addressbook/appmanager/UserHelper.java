@@ -75,8 +75,24 @@ public class UserHelper extends HelperBase {
     fillUserForm(user, true);
     submitUserCreation();
     goToHomePage();
-
   }
+
+    public void modifyUser(int index, UserData user) {
+      selectUser(index);
+      initUserModification();
+      fillUserForm(user, false);
+      submitUserModification();
+      goToHomePage();
+    }
+
+  public void deleteUser(int index) {
+    selectUser(index);
+    deleteSelectedUsers();
+    closeUserDeletionAlert();
+    goToHomePage();
+  }
+
+
 
   public boolean isThereAUser() {
     return isElementPresent(By.name("selected[]"));
