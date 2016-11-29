@@ -70,14 +70,14 @@ public class UserHelper extends HelperBase {
   }
 
 
-  public void createUser(UserData user) {
+  public void create(UserData user) {
     initUserCreation();
     fillUserForm(user, true);
     submitUserCreation();
     goToHomePage();
   }
 
-    public void modifyUser(int index, UserData user) {
+    public void modify(int index, UserData user) {
       selectUser(index);
       initUserModification();
       fillUserForm(user, false);
@@ -85,7 +85,7 @@ public class UserHelper extends HelperBase {
       goToHomePage();
     }
 
-  public void deleteUser(int index) {
+  public void delete(int index) {
     selectUser(index);
     deleteSelectedUsers();
     closeUserDeletionAlert();
@@ -102,7 +102,7 @@ public class UserHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<UserData> getUserList() {
+  public List<UserData> list() {
     List<UserData> users = new ArrayList<UserData>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements){
