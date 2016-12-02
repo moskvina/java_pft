@@ -1,16 +1,15 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.UserData;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by jane on 10/31/16.
@@ -29,6 +28,11 @@ public class UserHelper extends HelperBase {
   public void selectUser(int index) {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
+
+  public void selectUserById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+  }
+
 
   public void submitUserCreation() {
     wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
@@ -77,33 +81,23 @@ public class UserHelper extends HelperBase {
     goToHomePage();
   }
 
-    public void modify(int index, UserData user) {
-      selectUser(index);
+    public void modify(UserData user) {
+      selectUserById(user.getId());
       initUserModification();
       fillUserForm(user, false);
       submitUserModification();
       goToHomePage();
     }
 
-  public void delete(int index) {
-    selectUser(index);
+  public void delete(UserData user) {
+    selectUserById(user.getId());
     deleteSelectedUsers();
     closeUserDeletionAlert();
     goToHomePage();
   }
 
-
-
-  public boolean isThereAUser() {
-    return isElementPresent(By.name("selected[]"));
-  }
-
-  public int getUserCount() {
-    return wd.findElements(By.name("selected[]")).size();
-  }
-
-  public List<UserData> list() {
-    List<UserData> users = new ArrayList<UserData>();
+  public Set<UserData> all() {
+    Set<UserData> users = new HashSet<>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements){
       String lastName = element.findElement(By.xpath(".//td[2]")).getText();
@@ -113,4 +107,5 @@ public class UserHelper extends HelperBase {
     }
     return users;
   }
+
 }
