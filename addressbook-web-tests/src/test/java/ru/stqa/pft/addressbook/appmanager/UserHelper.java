@@ -6,10 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.UserData;
+import ru.stqa.pft.addressbook.model.Users;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by jane on 10/31/16.
@@ -96,8 +95,8 @@ public class UserHelper extends HelperBase {
     goToHomePage();
   }
 
-  public Set<UserData> all() {
-    Set<UserData> users = new HashSet<>();
+  public Users all() {
+    Users users = new Users();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements){
       String lastName = element.findElement(By.xpath(".//td[2]")).getText();
