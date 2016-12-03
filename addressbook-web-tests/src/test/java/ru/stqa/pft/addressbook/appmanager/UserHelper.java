@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import ru.stqa.pft.addressbook.model.Groups;
 import ru.stqa.pft.addressbook.model.UserData;
 import ru.stqa.pft.addressbook.model.Users;
 
@@ -77,6 +78,7 @@ public class UserHelper extends HelperBase {
     initUserCreation();
     fillUserForm(user, true);
     submitUserCreation();
+    userCache = null;
     goToHomePage();
   }
 
@@ -85,6 +87,7 @@ public class UserHelper extends HelperBase {
       initUserModification();
       fillUserForm(user, false);
       submitUserModification();
+      userCache = null;
       goToHomePage();
     }
 
@@ -92,19 +95,26 @@ public class UserHelper extends HelperBase {
     selectUserById(user.getId());
     deleteSelectedUsers();
     closeUserDeletionAlert();
+    userCache = null;
     goToHomePage();
   }
 
+  private Users userCache = null;
+
   public Users all() {
-    Users users = new Users();
+    if (userCache != null) {
+      return new Users(userCache);
+    }
+
+    userCache = new Users();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements){
       String lastName = element.findElement(By.xpath(".//td[2]")).getText();
       String firstName = element.findElement(By.xpath(".//td[3]")).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      users.add(new UserData().withId(id).withFirstname(firstName).withLastname(lastName));
+      userCache.add(new UserData().withId(id).withFirstname(firstName).withLastname(lastName));
     }
-    return users;
+    return new Users(userCache);
   }
 
 }
