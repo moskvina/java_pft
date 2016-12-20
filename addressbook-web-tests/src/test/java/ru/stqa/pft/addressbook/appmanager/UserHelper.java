@@ -99,6 +99,11 @@ public class UserHelper extends HelperBase {
     goToHomePage();
   }
 
+  public int count() {
+    return wd.findElements(By.name("selected[]")).size();
+  }
+
+
   private Users userCache = null;
 
   public Users all() {
