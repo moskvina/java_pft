@@ -8,6 +8,37 @@ public class UserData {
   private String homenumber;
   private String email;
   private String group;
+  private String homePhone;
+  private String mobilePhone;
+
+  public String getWorkPhone() {
+    return workPhone;
+  }
+
+  public UserData withWorkPhone(String workPhone) {
+    this.workPhone = workPhone;
+    return this;
+  }
+
+  public String getMobilePhone() {
+    return mobilePhone;
+  }
+
+  public UserData withMobilePhone(String mobilePhone) {
+    this.mobilePhone = mobilePhone;
+    return this;
+  }
+
+  public String getHomePhone() {
+    return homePhone;
+  }
+
+  public UserData withHomePhone(String homePhone) {
+    this.homePhone = homePhone;
+    return this;
+  }
+
+  private String workPhone;
 
 
   public int getId() {
