@@ -97,6 +97,7 @@ public class UserHelper extends HelperBase {
     goToHomePage();
   }
 
+<<<<<<< HEAD
   public Set<UserData> all() {
     Set<UserData> users = new HashSet<UserData>();
     List<WebElement> rows = wd.findElements(By.name("entry"));
@@ -108,6 +109,18 @@ public class UserHelper extends HelperBase {
       String[] phones = cells.get(5).getText().split("\n");
       users.add(new UserData().withId(id).withFirstname(firstname).withLastname(lastname)
               .withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
+=======
+  public int count() {
+    return wd.findElements(By.name("selected[]")).size();
+  }
+
+
+  private Users userCache = null;
+
+  public Users all() {
+    if (userCache != null) {
+      return new Users(userCache);
+>>>>>>> origin/master
     }
     return users;
   }
