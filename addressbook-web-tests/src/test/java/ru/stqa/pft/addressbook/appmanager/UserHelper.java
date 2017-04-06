@@ -8,7 +8,9 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.UserData;
 import ru.stqa.pft.addressbook.model.Users;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by jane on 10/31/16.
@@ -95,14 +97,15 @@ public class UserHelper extends HelperBase {
     goToHomePage();
   }
 
-  public Users all() {
-    Users users = new Users();
-    List<WebElement> elements = wd.findElements(By.name("entry"));
-    for (WebElement element : elements){
-      String lastName = element.findElement(By.xpath(".//td[2]")).getText();
-      String firstName = element.findElement(By.xpath(".//td[3]")).getText();
-      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      users.add(new UserData().withId(id).withFirstname(firstName).withLastname(lastName));
+  public Set<UserData> all() {
+    Set<UserData> users = new HashSet<UserData>();
+    List<WebElement> rows = wd.findElements(By.name("entry"));
+    for (WebElement row : rows) {
+      List<WebElement> cells = row.findElements(By.tagName("td"));
+      int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
+      String lastname = cells.get(1).getText();
+      String firstname = cells.get(2).getText();
+      users.add(new UserData().withId(id).withFirstname(firstname).withLastname(lastname));
     }
     return users;
   }
